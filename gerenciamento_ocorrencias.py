@@ -1,4 +1,5 @@
 ocorrencias = []
+historico = []
 
 def gerar_id(nome):
     soma = 0
@@ -32,6 +33,7 @@ def cadastrar_ocorrencia():
     }
 
     ocorrencias.append(novas_ocorrencias)
+    historico.append("Cadastro da Ocorrência " + id_ocorrencia)
 
     print("\nOcorrência cadastrada!")
     print("ID:", id_ocorrencia)
@@ -55,12 +57,29 @@ def buscar_ocorrencia():
     id_busca = input("Digite o ID para buscar: ")
     print("Buscando ocorrência com ID:", id_busca)
 
+def ver_historico():
+    print("\nHISTÓRICO DE AÇÕES")
+    if len(historico) == 0:
+        print("Nenhuma ação registrada.")
+    else:
+        for acao in historico:
+            print(acao)
+
+def desfazer_acao():
+    print("\nDESFAZER ÚLTIMA AÇÃO")
+    if len(historico) == 0:
+        print("Nenhuma ação para desfazer.")
+    else:
+        ultima_acao = historico.pop()
+        print("Ação desfeita:", ultima_acao)
 
 while True:
     print("\n===== MENU =====")
     print("1 - Cadastrar ocorrência")
     print("2 - Listar ocorrências")
     print("3 - Buscar ocorrência")
+    print("4 - Ver histórico de ações")
+    print("5 - Desfazer última ação")
     print("0 - Sair")
 
     opcao = input("Escolha uma opção: ")
@@ -71,6 +90,10 @@ while True:
         listar_ocorrencias()
     elif opcao == "3":
         buscar_ocorrencia()
+    elif opcao == "4":
+        ver_historico()
+    elif opcao == "5":
+        desfazer_acao()
     elif opcao == "0":
         print("Saindo...")
         break
