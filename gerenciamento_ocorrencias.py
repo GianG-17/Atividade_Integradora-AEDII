@@ -1,29 +1,46 @@
 ocorrencias = []
 historico = []
+hash_nome = {}
+hash_tipo = {}
 
 def gerar_id(nome):
     soma = 0
-
     for letra in nome:
         soma = soma + ord(letra)
-
     codigo = soma % 10000
     prefixo = nome[:3].upper()
-
     return prefixo + "-" + str(codigo)
+
+
+def inserir_hash_nome(ocorrencia):
+    chave = ocorrencia["nome"].lower()
+    if chave not in hash_nome:
+        hash_nome[chave] = []
+    hash_nome[chave].append(ocorrencia)
+
+
+def inserir_hash_tipo(ocorrencia):
+    chave = ocorrencia["tipo"].lower()
+    if chave not in hash_tipo:
+        hash_tipo[chave] = []
+    hash_tipo[chave].append(ocorrencia)
 
 
 def cadastrar_ocorrencia():
     print("\nCADASTRAR OCORRÊNCIA")
-
     nome = input("Nome do requisitante: ")
     id_ocorrencia = gerar_id(nome)
-
     tipo = input("Tipo da ocorrência: ")
     descricao = input("Descrição: ")
-    prioridade = input("Prioridade de 1 a 5: ")
 
-    novas_ocorrencias = {
+    while True:
+        prioridade_texto = input("Prioridade de 1 a 5: ")
+        if prioridade_texto.isdigit() and 1 <= int(prioridade_texto) <= 5:
+            prioridade = int(prioridade_texto)
+            break
+        print("Digite um número inteiro entre 1 e 5.")
+
+    nova_ocorrencia = {
         "id": id_ocorrencia,
         "nome": nome,
         "tipo": tipo,
@@ -32,7 +49,11 @@ def cadastrar_ocorrencia():
         "status": "Aberto"
     }
 
-    ocorrencias.append(novas_ocorrencias)
+    ocorrencias.append(nova_ocorrencia)
+
+    inserir_hash_nome(nova_ocorrencia)
+    inserir_hash_tipo(nova_ocorrencia)
+
     historico.append("Cadastro da Ocorrência " + id_ocorrencia)
 
     print("\nOcorrência cadastrada!")
@@ -42,7 +63,6 @@ def cadastrar_ocorrencia():
     print("Descrição:", descricao)
     print("Prioridade:", prioridade)
 
-
 def listar_ocorrencias():
     print("\nLISTAR OCORRÊNCIAS")
     if len(ocorrencias) == 0:
@@ -51,11 +71,30 @@ def listar_ocorrencias():
         for ocorrencia in ocorrencias:
             print(ocorrencia)
 
-
 def buscar_ocorrencia():
     print("\nBUSCAR OCORRÊNCIA")
     id_busca = input("Digite o ID para buscar: ")
     print("Buscando ocorrência com ID:", id_busca)
+
+def buscar_por_nome():
+    print("\nBUSCAR POR NOME")
+    nome_busca = input("Digite o nome do solicitante: ").lower()
+    if nome_busca in hash_nome:
+        print("\nOcorrências encontradas:")
+        for ocorrencia in hash_nome[nome_busca]:
+            print(ocorrencia)
+    else:
+        print("Nenhuma ocorrência encontrada para esse nome.")
+
+def buscar_por_tipo():
+    print("\nBUSCAR POR TIPO")
+    tipo_busca = input("Digite o tipo da ocorrência: ").lower()
+    if tipo_busca in hash_tipo:
+        print("\nOcorrências encontradas:")
+        for ocorrencia in hash_tipo[tipo_busca]:
+            print(ocorrencia)
+    else:
+        print("Nenhuma ocorrência encontrada para esse tipo.")
 
 def ver_historico():
     print("\nHISTÓRICO DE AÇÕES")
@@ -77,11 +116,12 @@ while True:
     print("\n===== MENU =====")
     print("1 - Cadastrar ocorrência")
     print("2 - Listar ocorrências")
-    print("3 - Buscar ocorrência")
-    print("4 - Ver histórico de ações")
-    print("5 - Desfazer última ação")
+    print("3 - Buscar ocorrência por ID")
+    print("4 - Buscar ocorrência por nome")
+    print("5 - Buscar ocorrência por tipo")
+    print("6 - Ver histórico de ações")
+    print("7 - Desfazer última ação")
     print("0 - Sair")
-
     opcao = input("Escolha uma opção: ")
 
     if opcao == "1":
@@ -91,8 +131,12 @@ while True:
     elif opcao == "3":
         buscar_ocorrencia()
     elif opcao == "4":
-        ver_historico()
+        buscar_por_nome()
     elif opcao == "5":
+        buscar_por_tipo()
+    elif opcao == "6":
+        ver_historico()
+    elif opcao == "7":
         desfazer_acao()
     elif opcao == "0":
         print("Saindo...")
