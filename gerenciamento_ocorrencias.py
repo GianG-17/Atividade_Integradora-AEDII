@@ -1,3 +1,5 @@
+from datetime import datetime
+
 ocorrencias = []
 historico = []
 hash_nome = {}
@@ -32,6 +34,7 @@ def cadastrar_ocorrencia():
     id_ocorrencia = gerar_id(nome)
     tipo = input("Tipo da ocorrência: ")
     descricao = input("Descrição: ")
+    hora_atual = datetime.now().strftime("%H:%M:%S")
 
     while True:
         prioridade_texto = input("Prioridade de 1 a 5: ")
@@ -54,7 +57,7 @@ def cadastrar_ocorrencia():
     inserir_hash_nome(nova_ocorrencia)
     inserir_hash_tipo(nova_ocorrencia)
 
-    historico.append("Cadastro da Ocorrência " + id_ocorrencia)
+    historico.append("Cadastro da Ocorrência: " + id_ocorrencia + " às " + hora_atual)
 
     print("\nOcorrência cadastrada!")
     print("ID:", id_ocorrencia)
