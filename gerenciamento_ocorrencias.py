@@ -107,6 +107,20 @@ def ver_historico():
         for acao in historico:
             print(acao)
 
+def salvar_historico():
+    arquivo = open("historico.txt", "w")
+    for acao in historico:
+        arquivo.write(acao + "\n")
+    arquivo.close()
+    print("\nHistórico salvo no historico.txt")
+
+def carregar_historico():
+    arquivo = open("historico.txt", "r")
+    for linha in arquivo:
+        historico.append(linha)
+    arquivo.close()
+    print("\nHistórico carregado de historico.txt")
+
 def desfazer_acao():
     print("\nDESFAZER ÚLTIMA AÇÃO")
     if len(historico) == 0:
@@ -123,7 +137,8 @@ while True:
     print("4 - Buscar ocorrência por nome")
     print("5 - Buscar ocorrência por tipo")
     print("6 - Ver histórico de ações")
-    print("7 - Desfazer última ação")
+    print("7 - Salvar/Carregar histórico")
+    print("8 - Desfazer última ação")
     print("0 - Sair")
     opcao = input("Escolha uma opção: ")
 
@@ -140,6 +155,14 @@ while True:
     elif opcao == "6":
         ver_historico()
     elif opcao == "7":
+        opcao_historico = input("Deseja Salvar ou Carregar histórico?(S/C): ")
+        if opcao_historico.upper() == "S":
+            salvar_historico()
+        elif opcao_historico.upper() == "C":
+            carregar_historico()
+        else:
+            print("Opção inválida.")
+    elif opcao == "8":
         desfazer_acao()
     elif opcao == "0":
         print("Saindo...")
