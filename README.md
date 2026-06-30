@@ -54,28 +54,53 @@ A heap seria o ideal, mas não chegamos a implementar. O Bubble Sort resolve pra
 Como precisamos utilizar diversas estruturas diferentes, a maior dificuldade que tivemos foi decidir qual era a melhor para cada situação.
 
 Menu:
+
 <img src="imagens/menu.png" alt="" width="500">
-Cadastrar ocorrência:
+
+Cadastrar ocorrência: 
+
 <img src="imagens/cadastro.png" alt="" width="500">
+
 Listar ocorrências:
+
 <img src="imagens/listar.png" alt="" width="500">]
+
 Buscar ocorrências por ID:
+
 <img src="imagens/buscarid.png" alt="" width="500">
+
 Buscar por nome:
+
 <img src="imagens/buscarnome.png" alt="" width="500">
+
 Buscar por tipo:
+
 <img src="imagens/buscartipo.png" alt="" width="500">
+
 Ver histórico:
+
 <img src="imagens/historico.png" alt="" width="500">
+
 Salvar histórico:
+
 <img src="imagens/salvar.png" alt="" width="500">
+
 Carregar histórico:
+
 <img src="imagens/carregar.png" alt="" width="500">
+
 Desfazer última ação:
+
 <img src="imagens/desfazer.png" alt="" width="500">
+
 Ver fila de atendimento:
+
 <img src="imagens/fila.png" alt="" width="500">
+
 Atender próxima ocorrência:
+
 <img src="imagens/atender.png" alt="" width="500">
+
 Ordenar ocorências por prioridade:
+
 <img src="imagens/ordenar.png" alt="" width="500">
