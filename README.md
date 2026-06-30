@@ -3,6 +3,14 @@ AED2 — Projeto Integrador
 
 ---
 
+## Grupo
+
+Gian Garima
+
+Gabriel Soares
+
+Hernane Lemes
+
 ## Como rodar
 
 Precisa ter Python 3 instalado. Sem bibliotecas externas.
